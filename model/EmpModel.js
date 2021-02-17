@@ -4,7 +4,12 @@ const validator = require("validator")
 
 const empSchema = new mongoose.Schema({
 
-    name: {
+    firstName: {
+        type: String,
+        required: true,
+        minlength: 3
+    },
+    lastName: {
         type: String,
         required: true,
         minlength: 3
@@ -27,6 +32,11 @@ const empSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    password:{
+        type:String,
+        max:10,
+        require:true,
+    }
 
 })
 
@@ -47,6 +57,24 @@ class EmployeeModel {
             next(error);
         }
     }
+
+    getdata = (req, res) => {
+        try {
+            return new Promise((resolve, reject) => {
+                empModel.find().then((result) => {
+                    resolve(result)
+                }).catch((error) => {
+                    reject(error)
+                })
+            })
+
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
+    
 
 }
 module.exports = new EmployeeModel();
