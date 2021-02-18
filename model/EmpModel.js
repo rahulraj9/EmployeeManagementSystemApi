@@ -32,10 +32,10 @@ const empSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    password:{
-        type:String,
-        max:10,
-        require:true,
+    password: {
+        type: String,
+        max: 10,
+        require: true,
     }
 
 })
@@ -72,9 +72,18 @@ class EmployeeModel {
             next(error);
         }
     }
+    updateData(id, newData) {
+        return empModel.findByIdAndUpdate(id, newData)
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            })
+    }
 
 
-    
+
 
 }
 module.exports = new EmployeeModel();

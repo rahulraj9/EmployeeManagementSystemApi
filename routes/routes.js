@@ -2,6 +2,7 @@ const route = require("express").Router();
 
 const empController =require('../Controller/EmpController')
 
-route.get('/getData', empController.getEmpData)
-route.post('/addData', empController.addEmpData)
+route.get('/Employee/getData', empController.getEmpData)
+route.post('/Employee/addEmpData', empController.addEmpData) 
+route.put("/Employee/update/:id", empController.updateData)
 module.exports = route

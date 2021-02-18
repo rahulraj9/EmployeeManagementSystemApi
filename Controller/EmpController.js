@@ -27,7 +27,6 @@ class EmployeeController {
 
     getEmpData = (req, res, next) => {
         try {
-            
             empService.getDataService(req.body).then((result) =>{
             
                 response.sucess = true;
@@ -48,6 +47,25 @@ class EmployeeController {
     }
 
 
+    updateData(req, res,next) {
+        try {
+            let newData = req.body.update;
+            let empid = req.params.id;
+            empService.updateData(empid, newData).then((result) => {
+                    response.success = true;
+                    response.data = result.data;
+                    response.message = result.message;
+                    res.status(200).send(response);
+                }).catch((err) => {
+                    response.success = false;
+                    response.data = err.message;
+                    res.status(400).send(response);
+                });
+
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 module.exports = new EmployeeController();
