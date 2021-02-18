@@ -54,6 +54,21 @@ class EmployeeService {
     }
 
 
+    deleteData(id){
+        try {
+            return empModel.deleteData(id)
+            .then((result) =>{
+                return ({ message: "Employee Record Deleted Successfully", data: result });
+            })
+            .catch((error)=> {
+                return ({ message: "Employee Record is Not found", error: error });
+            })
+        } catch (error) {
+            console.error("Employee Record is Not found Please Enter Correct One");
+        }
+    }
+
+
 }
 
 module.exports = new EmployeeService();

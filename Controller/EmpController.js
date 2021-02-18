@@ -66,6 +66,24 @@ class EmployeeController {
             next(error)
         }
     }
+    deleteData(req, res) {
+        try {
+            let empid = req.params.id;
+            empService.deleteData(empid)
+                .then((result) => {
+                    response.success = true;
+                    response.data = result.data;
+                    response.message = result.message;
+                    res.status(200).send(response);
+                }).catch((err) => {
+                    response.success = false;
+                    response.data = err.message;
+                    res.status(400).send(response);
+                });
+        } catch (error) {
+            console.error("Employee Record is Not found Please Enter Correct One");
+        }
+    }
 }
 
 module.exports = new EmployeeController();

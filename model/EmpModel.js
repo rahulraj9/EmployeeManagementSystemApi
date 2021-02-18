@@ -82,6 +82,16 @@ class EmployeeModel {
             })
     }
 
+    deleteData(id) {
+        return empModel.findByIdAndRemove(id)
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            })
+    }
+
 
 
 
