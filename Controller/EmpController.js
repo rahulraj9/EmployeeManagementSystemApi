@@ -6,8 +6,8 @@ class EmployeeController {
     addEmpData = (req, res, next) => {
         try {
             console.log(req.body);
-            empService.addDataService(req.body).then((result) =>{
-            
+            empService.addDataService(req.body).then((result) => {
+
                 response.sucess = true;
                 response.message = result.message;
                 response.data = result.data;
@@ -27,8 +27,8 @@ class EmployeeController {
 
     getEmpData = (req, res, next) => {
         try {
-            empService.getDataService(req.body).then((result) =>{
-            
+            empService.getDataService(req.body).then((result) => {
+
                 response.sucess = true;
                 response.message = result.message;
                 response.data = result.data;
@@ -47,20 +47,20 @@ class EmployeeController {
     }
 
 
-    updateData(req, res,next) {
+    updateData(req, res, next) {
         try {
             let newData = req.body.update;
             let empid = req.params.id;
             empService.updateData(empid, newData).then((result) => {
-                    response.success = true;
-                    response.data = result.data;
-                    response.message = result.message;
-                    res.status(200).send(response);
-                }).catch((err) => {
-                    response.success = false;
-                    response.data = err.message;
-                    res.status(400).send(response);
-                });
+                response.success = true;
+                response.data = result.data;
+                response.message = result.message;
+                res.status(200).send(response);
+            }).catch((err) => {
+                response.success = false;
+                response.data = err.message;
+                res.status(400).send(response);
+            });
 
         } catch (error) {
             next(error)
@@ -70,6 +70,26 @@ class EmployeeController {
         try {
             let empid = req.params.id;
             empService.deleteData(empid)
+                .then((result) => {
+                    response.success = true;
+                    response.data = result.data;
+                    response.message = result.message;
+                    res.status(200).send(response);
+                }).catch((err) => {
+                    response.success = false;
+                    response.data = err.message;
+                    res.status(400).send(response);
+                });
+        } catch (error) {
+            console.error("Employee Record is Not found Please Enter Correct One");
+        }
+    }
+
+
+    findById(req, res) {
+        try {
+            let empid = req.params.id;
+            empService.findRecordById(empid)
                 .then((result) => {
                     response.success = true;
                     response.data = result.data;

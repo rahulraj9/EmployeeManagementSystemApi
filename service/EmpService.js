@@ -68,6 +68,20 @@ class EmployeeService {
         }
     }
 
+    findRecordById(id){
+        try {
+            console.log("Inside find record by id service");
+            return empModel.findById(id)
+            .then((result) => {
+                return ({ message: "Employee Record Find Successfully", data: result });
+            })
+            .catch((error) => {
+                return ({ message: "Employee Record is Not found", error: error });
+            })
+        } catch (error) {
+            console.error("Employee Record is Not found Please Enter Correct One");
+        }
+    }
 
 }
 

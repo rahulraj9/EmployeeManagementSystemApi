@@ -72,28 +72,52 @@ class EmployeeModel {
             next(error);
         }
     }
-    updateData(id, newData) {
-        return empModel.findByIdAndUpdate(id, newData)
-            .then(result => {
-                return result;
+    updateData = (id, newData) => {
+        try {
+            return new Promise((resolve, reject) => {
+                empModel.findByIdAndUpdate(id, newData).then(result => {
+                    resolve(result);
+                }).catch((error) => {
+                    reject(error)
+                })
+
             })
-            .catch(error => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+        } catch (error) {
+            next(error)
+        }
+
+    }
+    deleteData = (id) => {
+        try {
+            return new Promise((resolve, reject) => {
+                empModel.findByIdAndRemove(id).then(result => {
+                    resolve(result);
+                }).catch((error) => {
+                    reject(error)
+                })
+
             })
+        }
+        catch (error) {
+            next(error)
+        }
     }
 
-    deleteData(id) {
-        return empModel.findByIdAndRemove(id)
-            .then(result => {
-                return result;
+    findById = (id) => {
+        try {
+            return new Promise((resolve, reject) => {
+                empModel.findById(id).then(result => {
+                    resolve(result);
+                }).catch((error) => {
+                    reject(error)
+                })
+
             })
-            .catch(error => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
-            })
+        }
+        catch (error) {
+            next(error)
+        }
+
     }
-
-
-
-
 }
 module.exports = new EmployeeModel();
